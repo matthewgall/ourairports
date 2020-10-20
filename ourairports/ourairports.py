@@ -24,7 +24,7 @@ class Airport(object):
     def __hash__(self):
         return self.iata
 
-class OpenAirports:
+class OurAirports:
 
     def __init__(self):
         self.data = []
