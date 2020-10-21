@@ -5,7 +5,7 @@ from csv import DictReader
 from geopy.distance import geodesic
 
 class Airport(object):
-    __slots__ = ['ident', 'name', 'type', 'latitude', 'longitude', 'elevation', 'continent', 'country', 'iata', 'icao']
+    __slots__ = ['ident', 'name', 'type', 'latitude', 'longitude', 'elevation', 'continent', 'country', 'iata', 'icao', 'frequencies']
     def __init__(self, ident, name, type, latitude, longitude, elevation, continent, country, iata, icao):
         self.ident = ident
         self.name = name
@@ -25,6 +25,13 @@ class Airport(object):
         return True
     def __hash__(self):
         return self.iata
+    def getFrequencies(self):
+        try:
+            if self.frequencies:
+                return self.frequencies
+        except AttributeError:
+            self.frequencies = OurAirports().getFrequencies(self)
+            return self.frequencies
 
 class Frequency(object):
     __slots__ = ['airport', 'type', 'description', 'frequency']
