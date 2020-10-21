@@ -4,8 +4,9 @@ import os, gzip
 from csv import DictReader
 
 class Airport(object):
-    __slots__ = ['name', 'type', 'latitude', 'longitude', 'elevation', 'continent', 'country', 'iata', 'icao']
-    def __init__(self, name, type, latitude, longitude, elevation, continent, country, iata, icao):
+    __slots__ = ['ident', 'name', 'type', 'latitude', 'longitude', 'elevation', 'continent', 'country', 'iata', 'icao']
+    def __init__(self, ident, name, type, latitude, longitude, elevation, continent, country, iata, icao):
+        self.ident = ident
         self.name = name
         self.type = type
         # location data
@@ -24,16 +25,30 @@ class Airport(object):
     def __hash__(self):
         return self.iata
 
+class Frequency(object):
+    __slots__ = ['airport', 'type', 'description', 'frequency']
+    def __init__(self, airport, type, description, frequency):
+        self.airport = airport
+        self.type = type
+        self.description = description
+        self.frequency = frequency
+    def __eq__(self, other):
+        if not isinstance(other, Frequency):
+            return False
+        return True
+
 class OurAirports:
 
     def __init__(self):
-        self.data = []
+        self.airports = []
+        self.frequencies = []
         self.dir = os.path.dirname(os.path.realpath(__file__))
         with gzip.open('{}/data/airports.csv.gz'.format(self.dir), mode='rt') as f:
             reader = DictReader(f)
             for row in reader:
-                self.data.append(
+                self.airports.append(
                     Airport(
+                        row['ident'],
                         row['name'],
                         row['type'],
                         row['latitude_deg'],
@@ -45,14 +60,33 @@ class OurAirports:
                         row['gps_code']
                     )
                 )
+        with gzip.open('{}/data/frequencies.csv.gz'.format(self.dir), mode='rt') as f:
+            reader = DictReader(f)
+            for row in reader:
+                self.frequencies.append(
+                    Frequency(
+                        row['airport_ident'],
+                        row['type'],
+                        row['description'],
+                        row['frequency_mhz'],
+                    )
+                )
 
+    def getAirportsByIdent(self, ident):
+        return [x for x in self.airports if x.ident == ident]
+    
     def getAirportsByType(self, type):
         if not type in ["closed_airport", "heliport", "large_airport", "medium_airport", "seaplane_base", "small_airport"]:
             return []
-        return [x for x in self.data if x.type == type]
+        return [x for x in self.airports if x.type == type]
 
     def getAirportsByICAO(self, icao):
-        return [x for x in self.data if x.icao == icao]
+        return [x for x in self.airports if x.icao == icao]
 
     def getAirportsByIATA(self, iata):
-        return [x for x in self.data if x.iata == iata]
+        return [x for x in self.airports if x.iata == iata]
+    
+    def getFrequencies(self, airport):
+        if not isinstance(airport, Airport):
+            return False
+        return [x for x in self.frequencies if x.airport == airport.ident]

@@ -15,6 +15,11 @@ Simply run:
 ### Get airport information by ICAO identifier
 
     from ourairports import OurAirports
+	airports = OurAirports().getAirportsByICAO('EGFF')
+
+### Get airport information by IATA identifier
+
+    from ourairports import OurAirports
 	airports = OurAirports().getAirportsByIATA('CWL')
 
 ## License
