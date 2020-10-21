@@ -1,5 +1,6 @@
 .envrc
 .direnv/
+ourairports/data
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
