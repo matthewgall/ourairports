@@ -1,0 +1,20 @@
+name: build
+on:
+  schedule:
+    - cron: "17 23 * * *"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2.3.1
+      - name: prepare
+        run: |
+          apt -y install pandoc
+          pip3 install -r requirements.txt
+      - name: build
+        run: |
+          make build
+      - name: publish
+        run: |
+          make upload
