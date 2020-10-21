@@ -18,7 +18,8 @@ docs:
 
 .PHONY: build
 build:
-	python setup.py bdist_wheel --universal
+	rm -rf build/ dist/ *.egg-info/
+	VERSION=${VERSION} python setup.py bdist_wheel --universal
 
 .PHONY: upload
 upload:

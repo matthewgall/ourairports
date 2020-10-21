@@ -1,4 +1,4 @@
-"""A setuptools based setup module for berrycam
+"""A setuptools based setup module for ourairports
 """
 
 # Always prefer setuptools over distutils
@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 # To use a consistent encoding
 from codecs import open
 from os import path
-import re
+import os, re
 
 here = path.abspath(path.dirname(__file__))
 
@@ -15,8 +15,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 # And get version information from the Makefile
-with open(path.join(here, 'Makefile'), encoding='utf-8') as f:
-    version = re.findall('VERSION\s\:\=\s([\d.]*)', f.read())[0]
+version = os.getenv('VERSION')
 
 setup(
     name='ourairports',
@@ -64,5 +63,5 @@ setup(
         'Programming Language :: Python :: 3',
     ],
     entry_points={},
-    install_requires=[]
+    install_requires=['geopy']
 )

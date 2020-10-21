@@ -2,6 +2,7 @@
 
 import os, gzip
 from csv import DictReader
+from geopy.distance import geodesic
 
 class Airport(object):
     __slots__ = ['ident', 'name', 'type', 'latitude', 'longitude', 'elevation', 'continent', 'country', 'iata', 'icao']
@@ -85,7 +86,10 @@ class OurAirports:
 
     def getAirportsByIATA(self, iata):
         return [x for x in self.airports if x.iata == iata]
-    
+
+    def getAirportsByDistance(self, lat, lon, distance):
+        return [x for x in self.airports if geodesic((x.latitude, x.longitude), (lat, lon)).miles < distance]
+
     def getFrequencies(self, airport):
         if not isinstance(airport, Airport):
             return False
