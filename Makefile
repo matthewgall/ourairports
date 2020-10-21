@@ -3,7 +3,6 @@ VERSION := $(shell date +'%Y%m%d')
 
 .PHONY: update
 update:
-	rm ourairports/data/*
 	curl https://ourairports.com/data/airports.csv > ourairports/data/airports.csv
 	curl https://ourairports.com/data/airport-frequencies.csv > ourairports/data/frequencies.csv
 	curl https://ourairports.com/data/runways.csv > ourairports/data/runways.csv
