@@ -9,7 +9,7 @@ update:
 	curl https://ourairports.com/data/navaids.csv > ourairports/data/navaids.csv
 	curl https://ourairports.com/data/countries.csv > ourairports/data/countries.csv
 	curl https://ourairports.com/data/regions.csv > ourairports/data/regions.csv
-	gzip ourairports/data/*
+	gzip -f ourairports/data/*
 
 .PHONY: docs
 docs:
