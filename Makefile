@@ -22,4 +22,4 @@ build:
 
 .PHONY: upload
 upload:
-	twine upload dist/${NAME}-${VERSION}-py2.py3-none-any.whl
+	twine upload dist/*
