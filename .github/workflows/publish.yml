@@ -14,9 +14,9 @@ jobs:
           python-version: '3.x'
       - name: dependencies
         run: |
+          sudo apt update && apt -y install pandoc
           python -m pip install --upgrade pip
           pip install setuptools wheel twine
-          apt -y install pandoc
       - name: build
         run: |
           make docs
