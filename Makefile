@@ -19,8 +19,12 @@ docs:
 .PHONY: build
 build:
 	rm -rf build/ dist/ *.egg-info/
-	VERSION=${VERSION}-${DATE} python3 setup.py sdist bdist_wheel --universal
+	VERSION=${VERSION}.${DATE} python3 setup.py sdist bdist_wheel --universal
 
 .PHONY: upload
 upload:
 	twine upload dist/*
+
+.PHONY: version
+version:
+	@echo ${VERSION}.${DATE}
