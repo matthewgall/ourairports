@@ -63,5 +63,6 @@ setup(
         'Programming Language :: Python :: 3',
     ],
     entry_points={},
-    install_requires=['geopy']
+    install_requires=['geopy'],
+    data_files=[('', 'data/*.gz')]
 )
