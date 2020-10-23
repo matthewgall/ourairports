@@ -64,5 +64,12 @@ setup(
     ],
     entry_points={},
     install_requires=['geopy'],
-    data_files=[('', 'ourairports/data/*.gz')]
+    data_files=[('', [
+        'ourairports/data/airports.csv.gz',
+        'ourairports/data/countries.csv.gz',
+        'ourairports/data/frequencies.csv.gz',
+        'ourairports/data/navaids.csv.gz',
+        'ourairports/data/regions.csv.gz',
+        'ourairports/data/runways.csv.gz'
+    ])]
 )
