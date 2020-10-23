@@ -33,6 +33,16 @@ Get airport information by IATA identifier
    from ourairports import OurAirports
    airports = OurAirports().getAirportsByIATA('CWL')
 
+Get airport information by distance from latitude/longitude
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+   from ourairports import OurAirports
+   airports = OurAirports().getAirportsByDistance('51.5007325', '-0.1268141', 25)
+   for port in airports:
+       print port.name
+
 License
 -------
 
