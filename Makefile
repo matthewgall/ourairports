@@ -1,5 +1,5 @@
 NAME := ourairports
-VERSION := 0.1.1
+VERSION := 1.0.0
 DATE := $(shell date +'%Y%m%d')
 
 .PHONY: update
