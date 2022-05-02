@@ -1,15 +1,15 @@
 NAME := ourairports
-VERSION := 1.0.0
+VERSION := 1.1.0
 DATE := $(shell date +'%Y%m%d')
 
 .PHONY: update
 update:
-	curl https://ourairports.com/data/airports.csv > ourairports/data/airports.csv
-	curl https://ourairports.com/data/airport-frequencies.csv > ourairports/data/frequencies.csv
-	curl https://ourairports.com/data/runways.csv > ourairports/data/runways.csv
-	curl https://ourairports.com/data/navaids.csv > ourairports/data/navaids.csv
-	curl https://ourairports.com/data/countries.csv > ourairports/data/countries.csv
-	curl https://ourairports.com/data/regions.csv > ourairports/data/regions.csv
+	curl https://raw.githubusercontent.com/davidmegginson/ourairports-data/main/airports.csv > ourairports/data/airports.csv
+	curl https://raw.githubusercontent.com/davidmegginson/ourairports-data/main/airport-frequencies.csv > ourairports/data/frequencies.csv
+	curl https://raw.githubusercontent.com/davidmegginson/ourairports-data/main/runways.csv > ourairports/data/runways.csv
+	curl https://raw.githubusercontent.com/davidmegginson/ourairports-data/main/navaids.csv > ourairports/data/navaids.csv
+	curl https://raw.githubusercontent.com/davidmegginson/ourairports-data/main/countries.csv > ourairports/data/countries.csv
+	curl https://raw.githubusercontent.com/davidmegginson/ourairports-data/main/regions.csv > ourairports/data/regions.csv
 	gzip -f ourairports/data/*
 
 .PHONY: docs
